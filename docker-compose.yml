@@ -1,0 +1,66 @@
+
+services:
+  oracle-db:
+    image: gvenzl/oracle-free
+    container_name: oracle-db
+    ports:
+      - "1521:1521"
+    environment:
+      ORACLE_PASSWORD: oracle
+      APP_USER: INVEX
+      APP_USER_PASSWORD: Invex123
+    volumes:
+      - oracle-data:/opt/oracle/oradata
+      - ./oracle-init:/container-entrypoint-initdb.d
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "echo > /dev/tcp/0.0.0.0/1521"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - spring-oracle-net
+      
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:24.0.3
+    container_name: keycloak
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./keycloak:/opt/keycloak/data/import
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+      KC_DB: dev-mem
+    command: start-dev --import-realm
+    networks:
+      - spring-oracle-net
+    
+  spring-app:
+    build:
+      context: ./employees
+      dockerfile: Dockerfile
+    container_name: spring-app
+    depends_on:
+      oracle-db:
+        condition: service_healthy
+    networks:
+      - spring-oracle-net
+    ports:
+      - "8081:8081"
+    volumes:
+      - ./docker/wait-for-it.sh:/app/wait-for-it.sh 
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:oracle:thin:@oracle-db:1521/FREEPDB1
+    command: ["./wait-for-it.sh", "oracle-db:1521", "-t", "60", "--", "java", "-jar", "employees-0.0.1-SNAPSHOT.jar"]
+      
+volumes:
+  oracle-data:
+  
+networks:
+  spring-oracle-net:
+    name: spring-oracle-net
+
+
+  

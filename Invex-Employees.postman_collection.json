@@ -1,0 +1,196 @@
+{
+	"info": {
+		"_postman_id": "33935543-eb7b-424f-879f-838c4d5f495c",
+		"name": "Invex-Employees",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "15792307"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let jsonData = pm.response.json();\r",
+							"\r",
+							"// Save access_token to a variable\r",
+							"pm.environment.set(\"access_token\", jsonData.access_token);\r",
+							"\r",
+							"console.log(pm.environment.get(\"access_token\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "client_id",
+							"value": "noe-client",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "noe",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "admin123",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost:8080/realms/my-invex/protocol/openid-connect/token"
+			},
+			"response": []
+		},
+		{
+			"name": "Save all",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ4dDF5U2UtMUdiQlpOMHZXTUNKRE1mWmZoZzVZVjNNUjROaHIyZUpvQjZBIn0.eyJleHAiOjE3NTA2MzY2NTAsImlhdCI6MTc1MDYzNjM1MCwianRpIjoiZmM2MjVhOWEtMGJlMS00MTMzLWE4MWUtOTU5NDVlMzE1Yzc5IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9teS1pbnZleCIsInN1YiI6IjNiY2E0ZDRjLTdlNzQtNGM4OS05NjJmLTBmNmI3OTU5MTg2MSIsInR5cCI6IkJlYXJlciIsImF6cCI6Im5vZS1jbGllbnQiLCJzZXNzaW9uX3N0YXRlIjoiNmUyY2YwZjItZTE3NS00MzYxLWFiMjMtOTliZjZiZTcyODNiIiwiYWNyIjoiMSIsInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJhcGktcmVzdCJdfSwic2NvcGUiOiJlbWFpbCBwcm9maWxlIiwic2lkIjoiNmUyY2YwZjItZTE3NS00MzYxLWFiMjMtOTliZjZiZTcyODNiIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsInByZWZlcnJlZF91c2VybmFtZSI6Im5vZSIsImVtYWlsIjoiaW52ZXhAZXhhbXBsZS5jb20ifQ.X77CPsVJPxcYO4e7dWWAb6btN5X4Zooz2-qvxL0uet2jyLEOh-dT2Tf4dROCmeVoH_zdG9bXno073Wx-Ydc4avYNAg99xmx_zLRL3f-HQxKWrpdsASX8LDnnxUMcuc52H15oSlOw0Z39eEt3X6DlLwlck_lQI-8F_rjuytnVKnNunn9rYB5YnIi4q7JkMx0IiVFCIzbp4IB3yjTAmyInTYFAgJ50bZsWMDIr96xGA7ok05ji7w6RlXFO92DRr4Q9GQ6XqFFrvb5FS63ibZgIEtIyU_18aZ5e4aY5I58bFkIcbz9nNsGHMXk_LKWkqoAlcRtPfx5YtODlqTMJmBLCEQ"
+					}
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ4dDF5U2UtMUdiQlpOMHZXTUNKRE1mWmZoZzVZVjNNUjROaHIyZUpvQjZBIn0.eyJleHAiOjE3NTA2MzU5MzksImlhdCI6MTc1MDYzNTYzOSwianRpIjoiZjZkNzRmNTMtMDNlYy00ZGYzLWIwYTEtMjQwZjRiZTVlMGVmIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9teS1pbnZleCIsInN1YiI6IjNiY2E0ZDRjLTdlNzQtNGM4OS05NjJmLTBmNmI3OTU5MTg2MSIsInR5cCI6IkJlYXJlciIsImF6cCI6Im5vZS1jbGllbnQiLCJzZXNzaW9uX3N0YXRlIjoiYzQ1YjdmYTMtZDZhYi00YTJlLWJlMTQtNzE5MWU1ZmExOWZlIiwiYWNyIjoiMSIsInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJhcGktcmVzdCJdfSwic2NvcGUiOiJlbWFpbCBwcm9maWxlIiwic2lkIjoiYzQ1YjdmYTMtZDZhYi00YTJlLWJlMTQtNzE5MWU1ZmExOWZlIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsInByZWZlcnJlZF91c2VybmFtZSI6Im5vZSIsImVtYWlsIjoiaW52ZXhAZXhhbXBsZS5jb20ifQ.4kl7UWXUQ-cvvDTSNke66N7aHDC6aVWF44rrbC5aMTF0sMxB6hay01_1rtL1lyTC3T4-hI0Yr3bSh1ZI4inLhrPikybBkrBTvWp2kJE8t4b2YClbIrUuopqkmSZv3RIErGm6v3fGUpAQg8EprDPJxjJZI-AlnmrS7uXcylzxw4mJD1l4OCauvTg50cCJ8vjVcMwdOmmoCAaIzbZsqRX7gTiRH-ikV_0fxEfFL4sKanrsYxJgwznutHN-4RgsK_Y-In89F9uBIxKBpo13Y2ZOIFn2qoebpXhRPyjKeiJjxJiP-KCjVS8kzdjpbbwkR0Dev0ZDOQ7AJPj7-THhayo7Gg",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"employees\":[\r\n        {\r\n            \"firstName\":\"Noe\",\r\n            \"secondName\":\"israel\",\r\n            \"paternalSurname\":\"Hernandez\",\r\n            \"maternalSurname\":\"Guzman\",\r\n            \"gender\":\"O\",\r\n            \"birthdate\":\"28-09-1995\",\r\n            \"position\":\"Dev\"\r\n        },\r\n        {\r\n            \"firstName\":\"Noe\",\r\n            \"secondName\":\"israel\",\r\n            \"paternalSurname\":\"Hernandez\",\r\n            \"maternalSurname\":\"Guzman\",\r\n            \"gender\":\"M\",\r\n            \"birthdate\":\"28-09-1995\",\r\n            \"position\":\"Backend Dev\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8081/api/v1/employees"
+			},
+			"response": []
+		},
+		{
+			"name": "Find all",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{access_token}}"
+					}
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "page",
+						"value": "0",
+						"type": "text"
+					},
+					{
+						"key": "size",
+						"value": "10",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "client-id",
+						"value": "invex-client",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "username",
+						"value": "invex",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "password",
+						"value": "invex123",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "grant_type",
+						"value": "password",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": "localhost:8081/api/v1/employees"
+			},
+			"response": []
+		},
+		{
+			"name": "Find by id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{access_token}}"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8081/api/v1/employees/25"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "access_token",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

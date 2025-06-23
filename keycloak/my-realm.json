@@ -1,0 +1,39 @@
+{
+  "realm": "my-invex",
+  "enabled": true,
+  "users": [
+    {
+      "username": "noe",
+	  "email": "invex@example.com",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "admin123",
+		  "temporary": false
+        }
+      ],
+      "realmRoles": ["api-rest"],
+	  "requiredActions": []
+	  
+    }
+  ],
+  "roles": {
+    "realm": [
+      {
+        "name": "api-rest"
+      }
+    ]
+  },
+  "clients": [
+    {
+      "clientId": "noe-client",
+	  "protocol": "openid-connect",
+	  "enabled": true,
+      "publicClient": true,
+      "redirectUris": ["*"],
+      "directAccessGrantsEnabled": true
+    }
+  ]
+}
